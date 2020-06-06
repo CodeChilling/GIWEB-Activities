@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="./Chart.min.js"></script>
+    <script src="./utils.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">You</a>
+                </li>
+
+            </ul>
+            <button type="button" class="btn btn-dark">Logout</button>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="display 4">
+            Products
+        </h1>
+
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">All</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Active</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Inactive</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+
+        </div>
+
+    </div>
+    <div class="container mt-4">
+        <h1 class="display 4">
+            Statistics
+        </h1>
+
+        <canvas id="canvas"></canvas>
+        <button id="randomizeData">Randomize Data</button>
+        <button id="addDataset">Add Dataset</button>
+        <button id="removeDataset">Remove Dataset</button>
+        <button id="addData">Add Data</button>
+        <button id="removeData">Remove Data</button>
+    </div>
+    <script>
+        var randomScalingFactor = function() {
+            return Math.round(Math.random() * 100);
+        };
+
+        var color = Chart.helpers.color;
+        var config = {
+            type: 'radar',
+            data: {
+                labels: [
+                    ['Eating', 'Dinner'],
+                    ['Drinking', 'Water'], 'Sleeping', ['Designing', 'Graphics'], 'Coding', 'Cycling', 'Running'
+                ],
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
+                    borderColor: window.chartColors.red,
+                    pointBackgroundColor: window.chartColors.red,
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor()
+                    ]
+                }, {
+                    label: 'My Second dataset',
+                    backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
+                    borderColor: window.chartColors.blue,
+                    pointBackgroundColor: window.chartColors.blue,
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor()
+                    ]
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Radar Chart'
+                },
+                scale: {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        window.onload = function() {
+            window.myRadar = new Chart(document.getElementById('canvas'), config);
+        };
+
+        document.getElementById('randomizeData').addEventListener('click', function() {
+            config.data.datasets.forEach(function(dataset) {
+                dataset.data = dataset.data.map(function() {
+                    return randomScalingFactor();
+                });
+            });
+
+            window.myRadar.update();
+        });
+
+        var colorNames = Object.keys(window.chartColors);
+        document.getElementById('addDataset').addEventListener('click', function() {
+            var colorName = colorNames[config.data.datasets.length % colorNames.length];
+            var newColor = window.chartColors[colorName];
+
+            var newDataset = {
+                label: 'Dataset ' + config.data.datasets.length,
+                borderColor: newColor,
+                backgroundColor: color(newColor).alpha(0.2).rgbString(),
+                pointBackgroundColor: newColor,
+                data: [],
+            };
+
+            for (var index = 0; index < config.data.labels.length; ++index) {
+                newDataset.data.push(randomScalingFactor());
+            }
+
+            config.data.datasets.push(newDataset);
+            window.myRadar.update();
+        });
+
+        document.getElementById('addData').addEventListener('click', function() {
+            if (config.data.datasets.length > 0) {
+                config.data.labels.push('dataset #' + config.data.labels.length);
+
+                config.data.datasets.forEach(function(dataset) {
+                    dataset.data.push(randomScalingFactor());
+                });
+
+                window.myRadar.update();
+            }
+        });
+
+        document.getElementById('removeDataset').addEventListener('click', function() {
+            config.data.datasets.splice(0, 1);
+            window.myRadar.update();
+        });
+
+        document.getElementById('removeData').addEventListener('click', function() {
+            config.data.labels.pop(); // remove the label first
+
+            config.data.datasets.forEach(function(dataset) {
+                dataset.data.pop();
+            });
+
+            window.myRadar.update();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+
+</html>
